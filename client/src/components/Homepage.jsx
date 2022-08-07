@@ -26,7 +26,7 @@ const Homepage = () => {
         Authorization: `token ${process.env.REACT_APP_GH}`,
       },
       method: "get",
-      url: `https://api.github.com/users/${input}/repos?per_page=10`,
+      url: `https://api.github.com/users/${input}/repos?per_page=100`,
     })
       .then((response) => {
         console.log(response.data)
