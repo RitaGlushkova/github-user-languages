@@ -21,22 +21,23 @@ const Homepage = () => {
         Authorization: `token ${process.env.REACT_APP_GH}`,
       },
       method: "get",
-        url: `https://api.github.com/users/${input}/repos?per_page=100`,
-    }).then((response) => {
-      const languagesArray = response.data
-        .map((el) => el.language)
-        .filter((v) => v);
-      const winner = Object.entries(
-        findMostUsedLanguageByRepos(languagesArray)
-      )[0];
-            setLanguage(
-              `${username}'s favourite languages is ${winner[0]}: ${winner[1]}%`
-            );
-          })
-      )
+      url: `https://api.github.com/users/${input}/repos?per_page=100`,
+    })
+      .then((response) => {
+        const languagesArray = response.data
+          .map((el) => el.language)
+          .filter((v) => v);
+        const winner = Object.entries(
+          findMostUsedLanguageByRepos(languagesArray)
+        )[0];
+        setLanguage(
+          `${username}'s favourite languages is ${winner[0]}: ${winner[1]}%`
+        );
+      })
       .catch((error) => {
-        setLanguage("Couldn't find this user")
-        console.error(`Error: ${error}`)});
+        setLanguage("Couldn't find this user");
+        console.error(`Error: ${error}`);
+      });
   };
   return (
     <div className="screen-height">
