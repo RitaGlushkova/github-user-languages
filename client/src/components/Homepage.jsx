@@ -17,9 +17,6 @@ const Homepage = () => {
   };
   const getResults = (input) => {
     axios({
-      headers: {
-        Authorization: `token ${process.env.REACT_APP_GH}`,
-      },
       method: "get",
       url: `https://api.github.com/users/${input}/repos?per_page=100`,
     })
@@ -31,7 +28,7 @@ const Homepage = () => {
           findMostUsedLanguageByRepos(languagesArray)
         )[0];
         setLanguage(
-          `${username}'s favourite languages is ${winner[0]}: ${winner[1]}%`
+          `We think ${username}'s favourite languages is ${winner[0]}: ${winner[1]}%`
         );
       })
       .catch((error) => {
