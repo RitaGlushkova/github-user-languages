@@ -16,7 +16,6 @@ const Homepage = () => {
     setLanguage("");
   };
   const getResults = (input) => {
-    let endPoints = [];
     axios({
       method: "get",
       url: `http://localhost:8080/github_api/users/${username}/repos`,
@@ -56,7 +55,6 @@ const Homepage = () => {
         console.error(`Error: ${error}`);
       });
   };
-
   return (
     <div className="screen-height">
       <div className="resize">
@@ -98,18 +96,16 @@ const Homepage = () => {
   );
 };
 
-const findMostUsedLanguageByBites = (array) => {
-  const object = {};
+const findMostUsedLanguageByRepos = (array) => {
   let language = {};
-  array.forEach((repoLanguages) => {
-    Object.keys(repoLanguages).forEach((l) => {
-      if (l in object) object[l] = object[l] + repoLanguages[l];
-      else object[l] = repoLanguages[l];
-    });
+  let object = {};
+  array.forEach((l) => {
+    if (l in object) object[l] = object[l] + 1;
+    else object[l] = 1;
   });
-  const totalSumOfBites = Object.values(object).reduce((a, b) => a + b, 0);
+  const total = Object.values(object).reduce((a, b) => a + b, 0);
   for (let i in object) {
-    object[i] = Math.floor((object[i] / totalSumOfBites) * 100);
+    object[i] = Math.floor((object[i] / total) * 100);
   }
   for (let i in object) {
     if (object[i] === Math.max(...Object.values(object)))
