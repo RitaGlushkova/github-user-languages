@@ -16,41 +16,21 @@ const Homepage = () => {
     setLanguage("");
   };
   const getResults = (input) => {
-    let endPoints = [];
     axios({
       method: "get",
       url: `http://localhost:8080/github_api/users/${username}/repos`,
     })
       .then((response) => {
-        endPoints = response.data.map(
-          (el) =>
-            "http://localhost:8080/github_api/repos/" +
-            username +
-            "/" +
-            el.name +
-            "/languages"
+        const languagesArray = response.data
+          .map((el) => el.language)
+          .filter((v) => v);
+        const winner = Object.entries(
+          findMostUsedLanguageByBites(languagesArray)
+        )[0];
+        setLanguage(
+          `We think ${username}'s favourite languages is ${winner[0]}: ${winner[1]}%`
         );
       })
-      .then(() =>
-        axios
-          .all(
-            endPoints.map((endpoint) =>
-              axios({
-                method: "get",
-                url: endpoint,
-              })
-            )
-          )
-          .then((result) => {
-            const arrayOfAllLanguagesForEachRepo = result.map((el) => el.data);
-            const winner = Object.entries(
-              findMostUsedLanguageByBites(arrayOfAllLanguagesForEachRepo)
-            )[0];
-            setLanguage(
-              `${username}'s favourite languages is ${winner[0]}: ${winner[1]}%`
-            );
-          })
-      )
       .catch((error) => {
         setLanguage("Couldn't find this user");
         console.error(`Error: ${error}`);
@@ -99,17 +79,15 @@ const Homepage = () => {
 };
 
 const findMostUsedLanguageByBites = (array) => {
-  const object = {};
   let language = {};
-  array.forEach((repoLanguages) => {
-    Object.keys(repoLanguages).forEach((l) => {
-      if (l in object) object[l] = object[l] + repoLanguages[l];
-      else object[l] = repoLanguages[l];
-    });
+  let object = {};
+  array.forEach((l) => {
+    if (l in object) object[l] = object[l] + 1;
+    else object[l] = 1;
   });
-  const totalSumOfBites = Object.values(object).reduce((a, b) => a + b, 0);
+  const total = Object.values(object).reduce((a, b) => a + b, 0);
   for (let i in object) {
-    object[i] = Math.floor((object[i] / totalSumOfBites) * 100);
+    object[i] = Math.floor((object[i] / total) * 100);
   }
   for (let i in object) {
     if (object[i] === Math.max(...Object.values(object)))
