@@ -1,17 +1,17 @@
 import React from "react";
+import "../../App.css";
 
-export const Input = ({ label, placeholderText, value, onChange }) => {
+export const Input = ({ label, value, onChange, placeholder, id }) => {
   return (
-    <div>
-      <label forhtml="username">{label}</label>
+    <div className="input-field col s6">
       <input
-        value={value}
-        //ref={forwardRef}
+        placeholder={placeholder}
+        id={id}
         type="text"
-        id="username"
+        value={value}
         onChange={onChange}
-        placeholder={placeholderText}
       />
+      <label forhtml="username">{label}</label>
     </div>
   );
 };
