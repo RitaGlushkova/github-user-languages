@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useState, useRef } from "react";
+import { useState } from "react";
 import axios from "axios";
 import Header from "./moledules/Header";
 import { Input } from "./atoms/Input";
@@ -8,13 +8,6 @@ import { Button } from "./atoms/Button";
 const Homepage = () => {
   const [username, setUsername] = useState("");
   const [language, setLanguage] = useState("");
-  //const inputRef = useRef(null);
-
-  // const handleClick = () => {
-  //   inputRef.current.focus();
-  //   setUsername(inputRef.current.value);
-  //   if (username.length) getResults(username);
-  // };
   const handleClick = () => {
     getResults(username)
   }
