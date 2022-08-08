@@ -18,23 +18,24 @@ const Homepage = () => {
   const getResults = (input) => {
     let endPoints = [];
     axios({
-      headers: {
-        Authorization: `token ${process.env.REACT_APP_GH}`,
-      },
       method: "get",
-      url: `https://api.github.com/users/${input}/repos?per_page=10`,
+      url: `http://localhost:8080/github_api/users/${username}/repos`,
     })
       .then((response) => {
-        endPoints = response.data.map((el) => el.languages_url);
+        endPoints = response.data.map(
+          (el) =>
+            "http://localhost:8080/github_api/repos/" +
+            username +
+            "/" +
+            el.name +
+            "/languages"
+        );
       })
       .then(() =>
         axios
           .all(
             endPoints.map((endpoint) =>
               axios({
-                headers: {
-                  Authorization: `token ${process.env.REACT_APP_GH}`,
-                },
                 method: "get",
                 url: endpoint,
               })
@@ -51,8 +52,9 @@ const Homepage = () => {
           })
       )
       .catch((error) => {
-        setLanguage("Couldn't find this user")
-        console.error(`Error: ${error}`)});
+        setLanguage("Couldn't find this user");
+        console.error(`Error: ${error}`);
+      });
   };
 
   return (
