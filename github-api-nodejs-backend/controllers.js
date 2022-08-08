@@ -3,7 +3,6 @@ const https = require("https");
 
 const getRepos = async function (req, res) {
   const user = req.params.user;
-  let { per_page } = req.query;
   const options = generateOptions("/users/" + user + "/repos");
 
   https
