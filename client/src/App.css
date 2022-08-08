@@ -1,4 +1,7 @@
-
+.card-action {
+  display: flex;
+  gap: 5px;
+}
 .App {
   text-align: center;
 }
@@ -6,6 +9,23 @@
 .App-logo {
   height: 40vmin;
   pointer-events: none;
+}
+.resize {
+  width : 40%;
+  margin-left: auto;
+  margin-right: auto
+}
+
+.screen-height {
+  display: flex;
+  height: 100vh;
+  flex-direction: column;
+  justify-content: space-between;
+}
+@media screen and (min-width: 0px) and (max-width: 400px) {
+ .resize {
+  width : 90%;
+ }
 }
 
 @media (prefers-reduced-motion: no-preference) {
