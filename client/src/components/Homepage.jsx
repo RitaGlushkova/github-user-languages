@@ -18,14 +18,14 @@ const Homepage = () => {
   const getResults = (input) => {
     axios({
       method: "get",
-      url: `http://localhost:8080/github_api/users/${username}/repos`,
+      url: `https://api.github.com/users/${input}/repos?per_page=100`,
     })
       .then((response) => {
         const languagesArray = response.data
           .map((el) => el.language)
           .filter((v) => v);
         const winner = Object.entries(
-          findMostUsedLanguageByBites(languagesArray)
+          findMostUsedLanguageByRepos(languagesArray)
         )[0];
         setLanguage(
           `We think ${username}'s favourite languages is ${winner[0]}: ${winner[1]}%`
@@ -36,7 +36,6 @@ const Homepage = () => {
         console.error(`Error: ${error}`);
       });
   };
-
   return (
     <div className="screen-height">
       <div className="resize">
@@ -78,7 +77,7 @@ const Homepage = () => {
   );
 };
 
-const findMostUsedLanguageByBites = (array) => {
+const findMostUsedLanguageByRepos = (array) => {
   let language = {};
   let object = {};
   array.forEach((l) => {
