@@ -7,7 +7,7 @@ This solution is an experiment with using node for api calls. The final guess of
 To be able to run code locally: 
 1. Create personal token on GitHub. 
 2. Create .env file in server root
-3. Add you personal token with name <GITHUB_ACCESS_TOKEN=your_personal_token_goes_here>
+3. Add you personal token with name GITHUB_ACCESS_TOKEN=<your_personal_token_goes_here>
 
 ## Available Scripts 
 
