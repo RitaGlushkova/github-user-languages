@@ -40,7 +40,7 @@ Repository has other branches where other solutions presented
 *Branch name: 'count-by-sumOfBites'*
 - Create a separate server directory and call api using express, then pass endpoint to client directory using axios. This is more of an experiment. I wanted to learn how to do it. 
 Two branches are created: 
-1. based on language per repo - one endpoint *Branch name: 'node-version'*
-2. based on sum of bites - two endpoints *Branch name: 'node-version-guessByNumberOfRepos'*
+1. based on sum of bites - one endpoint *Branch name: 'node-version'*
+2. based on language per repo - two endpoints *Branch name: 'node-version-guessByNumberOfRepos'*
 
 Zipped files for each branch attached.
