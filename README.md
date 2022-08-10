@@ -3,9 +3,6 @@ Input a username from GitHub to be presented with the best guess of the user's f
 # This is an alternative solution. Not selected for deployment 
 Fetch api via axios in React and find out favourite language by counting sum of bites. 
 
-Deployed on Netlify
-[https://github-language-guess.netlify.app/]
-
 ## Required steps to run locally
 To be able to run code locally:
 
