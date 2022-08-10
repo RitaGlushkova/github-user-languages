@@ -35,7 +35,7 @@ Tests main function which returns favourite language and proportion of it being 
 
 ## Other notes
 
-Repository has other branches where other solutions presented
+Repository has other branches where other solutions are presented
 - Fetch api via axios in React and find out favourite language by counting sum of bites. I think this solution gives less accurate result based on my own experience and according to other people's feedback.
 *Branch name: 'count-by-sumOfBites'*
 - Create a separate server directory and call api using express, then pass endpoint to client directory using axios. This is more of an experiment. I wanted to learn how to do it. 
