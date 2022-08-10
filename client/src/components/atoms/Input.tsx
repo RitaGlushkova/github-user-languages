@@ -1,17 +1,21 @@
 import React from "react";
 import "../../App.css";
-
-export const Input = ({ label, value, onChange, placeholder, id }) => {
+interface InputProps {
+  label: string;
+  value: string;
+  onChange: (e: any) => void;
+  id: string;
+}
+export const Input = ({ label, value, onChange, id }:InputProps) => {
   return (
     <div className="input-field col s6">
       <input
-        placeholder={placeholder}
         id={id}
         type="text"
         value={value}
         onChange={onChange}
       />
-      <label forhtml="username">{label}</label>
+      <label htmlFor={id}>{label}</label>
     </div>
   );
 };

@@ -4,6 +4,7 @@ import axios from "axios";
 import { Input } from "./atoms/Input";
 import { Button } from "./atoms/Button";
 import Footer from "./molecules/footer";
+import findMostUsedLanguageByRepos from "./findMostUsedLanguageByRepos";
 
 const Homepage = () => {
   const [username, setUsername] = useState("");
@@ -15,7 +16,7 @@ const Homepage = () => {
     setUsername("");
     setLanguage("");
   };
-  const getResults = (input) => {
+  const getResults = (input: string) => {
     axios({
       headers: {
         Authorization: `token ${process.env.REACT_APP_GH}`,
@@ -25,8 +26,8 @@ const Homepage = () => {
     })
       .then((response) => {
         const languagesArray = response.data
-          .map((el) => el.language)
-          .filter((v) => v);
+          .map((el: any) => el.language)
+          .filter((v: string | null) => v);
         const winner = Object.entries(
           findMostUsedLanguageByRepos(languagesArray)
         )[0];
@@ -51,9 +52,10 @@ const Homepage = () => {
             <div className="card-content">
               <form className="col s12">
                 <Input
+                  id="username"
                   value={username}
                   label="GitHub Username"
-                  onChange={(e) => setUsername(e.target.value)}
+                  onChange={(e: any) => setUsername(e.target.value)}
                 />
               </form>
               {language ? (
@@ -78,24 +80,6 @@ const Homepage = () => {
       <Footer></Footer>
     </div>
   );
-};
-
-const findMostUsedLanguageByRepos = (array) => {
-  let language = {};
-  let object = {};
-  array.forEach((l) => {
-    if (l in object) object[l] = object[l] + 1;
-    else object[l] = 1;
-  });
-  const total = Object.values(object).reduce((a, b) => a + b, 0);
-  for (let i in object) {
-    object[i] = Math.floor((object[i] / total) * 100);
-  }
-  for (let i in object) {
-    if (object[i] === Math.max(...Object.values(object)))
-      language[i] = object[i];
-  }
-  return language;
 };
 
 export default Homepage;

@@ -1,8 +1,11 @@
 import React from "react";
 import "../../App.css";
 
-
-export const Button = ({ btnName, handleClick }) => {
+interface ButtonProps {
+  btnName: string;
+  handleClick: () => void;
+}
+export const Button = ({ btnName, handleClick }: ButtonProps) => {
   return (
     <button
       className="btn"

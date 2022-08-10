@@ -6,11 +6,14 @@ import "materialize-css/dist/js/materialize.min.js";
 
 function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Homepage />} />
-      </Routes>
-    </BrowserRouter>
+    <>
+    <p style={{"display":"none"}}>Learn react</p>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Homepage />} />
+        </Routes>
+      </BrowserRouter>
+    </>
   );
 }
 
